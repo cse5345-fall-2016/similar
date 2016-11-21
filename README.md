@@ -1,15 +1,10 @@
-# Well Done!
+# Cool!
 
-Time to start coding.
+Now we need to split the string into a list of words.
 
-We need to sanitize our input text. It needs to be all lower case, and
-we need to replace everything that isn't a letter ("a" to "z") with a
-space.
+Write the function `Similar.Ngrams.as_wprd_list/1` that does this.
 
-Write the function `Similar.Ngrams.normalize/1` that does this. (I've
-saved you a little time by creating the file similar/lib/ngrams.ex.)
-
-The function String.replace might come in useful for part of this.
+The function String.split is your friend.
 
 You'll know you're done when the tests pass.
 

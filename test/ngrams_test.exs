@@ -18,15 +18,36 @@ defmodule NGramsTest do
       assert normalize(input) == result
     end
 
-    test "gives next clue" do
+  end
 
-      "yX.zdgVU"
-      |> normalize
-      |> String.upcase
-      |> String.replace("ZD", "zd")
-      |> String.replace("U", "u")
-      |> String.replace(" ", "V")
+  describe "as_word_list" do
+    test "empty string" do
+      assert as_word_list("") == []
+    end
+
+    test "just spaces" do
+      assert as_word_list("  ") == []
+    end
+
+    test "one word" do
+      assert as_word_list("cat") == [ "cat" ]
+    end
+
+    test "one word with spaces" do
+      assert as_word_list("  cat ") == [ "cat" ]
+    end
+
+    test "two words with spaces" do
+      assert as_word_list("  bee     cat") == [ "bee",  "cat" ]
+    end
+    
+    test "gives next clue" do
+      "balloons Going Very low"
+      |> as_word_list
+      |> Enum.map(fn << x :: utf8, _ :: binary >> -> x end)
+      |> List.to_string
       |> TH.next_branch
     end
   end
+
 end
