@@ -1,10 +1,19 @@
-# Cool!
+# Great job!
 
-Now we need to split the string into a list of words.
+Here's the big one. Given these two helpers, we now need to take our
+list of words and convert it into a set contains all the unique ngrams
+of a given length. So, given
 
-Write the function `Similar.Ngrams.as_wprd_list/1` that does this.
+    "ant bee cat dog ant bee"
 
-The function String.split is your friend.
+and a size of 2, we'd want a set containing
+
+    [ ["ant", "bee"], ["bee", "cat"], ["cat", "dog"], ["dog", "ant" ]
+
+Write the function `Similar.Ngrams.ngrams_in` that does this. it takes
+the string and the ngram size, and returns a MapSet.
+
+The function Enum.chunk is your friend.
 
 You'll know you're done when the tests pass.
 

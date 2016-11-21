@@ -2,9 +2,9 @@ ExUnit.start()
 
 defmodule TH do
 
-  def next_branch(name) do
+  def next_branch(name, decode \\ true) do
 
-    decoded_name = :base64.decode(name)
+    decoded_name = if decode, do: :base64.decode(name), else: name
 
     msg = """
 

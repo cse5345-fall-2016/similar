@@ -41,12 +41,38 @@ defmodule NGramsTest do
       assert as_word_list("  bee     cat") == [ "bee",  "cat" ]
     end
     
+  end
+
+  describe "ngrams" do
+
+    test "empty engrams" do
+      assert MapSet.equal?(ngrams_in(""), MapSet.new)
+    end
+
+    test "engrams of length 2" do
+      assert ngrams_in("a b c", 2) == MapSet.new([["a","b"], ["b","c"]])
+    end
+
+    test "engrams of length 3" do
+      assert ngrams_in("a b c", 3) == MapSet.new([["a","b","c"]])
+    end
+
+    test "downcasing works" do
+      assert ngrams_in("a B C", 3) == MapSet.new([["a","b","c"]])
+    end
+
+    test "nonword characters removed" do
+      input = ~S{"Hello," said Mary.}
+      result = [ ["hello", "said"], ["said", "mary"] ]
+      assert ngrams_in(input) == MapSet.new(result)
+    end
+
     test "gives next clue" do
-      "balloons Going Very low"
-      |> as_word_list
-      |> Enum.map(fn << x :: utf8, _ :: binary >> -> x end)
-      |> List.to_string
-      |> TH.next_branch
+      "a rose is a rose is a rose"
+      |> ngrams_in(2)
+      |> MapSet.size
+      |> (&"x#{&1}").()
+      |> TH.next_branch(false)
     end
   end
 
