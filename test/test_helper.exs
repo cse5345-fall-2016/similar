@@ -12,7 +12,7 @@ defmodule TH do
 
     Use the following two commands to start (if you dare...)
 
-        git fetch origin
+        git stash
 
         git checkout #{decoded_name}
 
