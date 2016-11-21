@@ -9,5 +9,7 @@ space.
 Write the function `Similar.Ngrams.normalize/1` that does this. (I've
 saved you a little time by creating the file similar/lib/ngrams.ex.)
 
+The function String.replace might come in useful for part of this.
+
 You'll know you're done when the tests pass.
 
