@@ -8,11 +8,10 @@ defmodule Similar.Shingle do
   end
 
   def lists_of_ngrams(named_strings, ngram_size) do
-      Enum.map(named_strings, fn [name, string] ->
-        Task.async(fn -> {name, ngrams_in(string, ngram_size)} end)
-      end)
-    |>
-      Enum.map(&Task.await/1)
+    Enum.map(named_strings, fn [name, string] ->
+      Task.async(fn -> {name, ngrams_in(string, ngram_size)} end)
+    end)
+    |> Enum.map(&Task.await/1)
   end
 
   def score_cross_product(lists_of_ngrams) do
