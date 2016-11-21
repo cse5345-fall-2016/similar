@@ -29,7 +29,7 @@ defmodule Similar.Ngrams do
 
   def as_word_list(string) do
     string
-    |> String.splitter(" ", trim: true)
+    |> String.split(" ", trim: true)
   end
   
 end
