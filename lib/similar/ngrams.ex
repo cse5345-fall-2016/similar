@@ -3,13 +3,23 @@ defmodule Similar.Ngrams do
   @non_word_chars ~r/[^a-z]/
 
 
- def ngrams_in(string, size \\ 2) do
+  @doc """
+  Normalize a string (downcasing it and removing nonword characters),
+  and return a set of all word ngrams in the result of the given length:
+
+      iex> import Similar.Ngrams
+      iex> result = ngrams_in("ant bee cat dog elk", 3)
+      iex> MapSet.equal? result, MapSet.new [ ~w/ant bee cat/, ~w/bee cat dog/, ~w/cat dog elk/  ]
+      true
+
+  """
+  def ngrams_in(string, size \\ 2) do
     string
     |> normalize
     |> as_word_list
-    # your code...
- end
-
+    |> Enum.chunk(size, 1)
+    |> Enum.reduce(MapSet.new, fn (ngram, set) -> MapSet.put(set, ngram) end)
+  end
 
   def normalize(string) do
     string
@@ -19,7 +29,7 @@ defmodule Similar.Ngrams do
 
   def as_word_list(string) do
     string
-    |> String.split(" ", trim: true)
+    |> String.splitter(" ", trim: true)
   end
-
+  
 end
