@@ -13,7 +13,8 @@ and a size of 2, we'd want a set containing
     [ ["ant", "bee"], ["bee", "cat"], ["cat", "dog"], ["dog", "ant" ]
 
 Write the function `Similar.Ngrams.ngrams_in` that does this. it takes
-the string and the ngram size, and returns a MapSet.
+the string and the ngram size, and returns a MapSet, where each
+element of that set is one of the ngram lists.
 
 The function Enum.chunk_every is your friend.
 
