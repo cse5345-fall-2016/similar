@@ -1,8 +1,10 @@
 # Great job!
 
 Here's the big one. Given these two helpers, we now need to take our
-list of words and convert it into a set contains all the unique ngrams
-of a given length. So, given
+list of words and convert it into a set containing all the unique ngrams
+of a given length. 
+
+An ngram is a sequence of n consecutive words from the list. So, given
 
     "ant bee cat dog ant bee"
 
