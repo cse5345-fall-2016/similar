@@ -15,7 +15,7 @@ and a size of 2, we'd want a set containing
 Write the function `Similar.Ngrams.ngrams_in` that does this. it takes
 the string and the ngram size, and returns a MapSet.
 
-The function Enum.chunk is your friend.
+The function Enum.chunk_every is your friend.
 
 You'll know you're done when the tests pass.
 
