@@ -4,17 +4,20 @@ defmodule Similar.Shingle do
 
   def similarity(named_strings, ngram_size) do
     lists_of_ngrams(named_strings, ngram_size)
-    |> score_cross_product
+    |> score_cross_product()
   end
 
   def lists_of_ngrams(named_strings, ngram_size) do
     named_strings
     |> Enum.map(fn [name, string] ->
       Task.async(fn ->
-        {name, ngrams_in(string, ngram_size)}
+        IO.puts "starting #{name}"
+        result = {name, ngrams_in(string, ngram_size)}
+        IO.puts "finished #{name}"
+        result
       end)
     end)
-    |> Enum.map(&Task.await/1)
+    |> Enum.map(&Task.await(&1, 10_000))
   end
 
   def score_cross_product(lists_of_ngrams) do
@@ -28,7 +31,7 @@ defmodule Similar.Shingle do
 
   # see https://en.wikipedia.org/wiki/Jaccard_index
   def jaccard(set1, set2) do
-    import Set
+    import MapSet
     size(intersection(set1, set2)) / size(union(set1, set2))
   end
 end

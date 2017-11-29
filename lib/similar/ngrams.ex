@@ -1,8 +1,5 @@
 defmodule Similar.Ngrams do
 
-  @non_word_chars ~r/[^a-z]/
-
-
   @doc """
   Normalize a string (downcasing it and removing nonword characters),
   and return a set of all word ngrams in the result of the given length:
@@ -18,13 +15,16 @@ defmodule Similar.Ngrams do
     |> normalize
     |> as_word_list
     |> Enum.chunk(size, 1)
-    |> Enum.reduce(MapSet.new, fn (ngram, set) -> MapSet.put(set, ngram) end)
+    |> Enum.uniq
+    |> Enum.into(MapSet.new)
   end
 
   def normalize(string) do
     string
     |> String.downcase
-    |> String.replace(@non_word_chars, " ")
+    |> String.codepoints
+    |> Enum.map(fn ch -> if (ch < "a" || ch > "z"), do: " ", else: ch end)
+    |> Enum.join
   end
 
   def as_word_list(string) do
